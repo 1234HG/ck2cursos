@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Página Inicial</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Barra lateral */
+        .sidebar {
+            width: 250px;
+            background-color: #000000;
+            color: #413f3f;
+            padding: 40px 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease;
+            box-shadow: none;
+            border-right: none;
+        }
+
+        .sidebar h3 {
+            font-size: 20px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #0004ff;
+            text-transform: uppercase;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 18px;
+            font-size: 18px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: #0004ff;
+            transform: translateX(10px);
+        }
+
+        .sidebar a.active {
+            color: #0004ff;
+            font-weight: 600;
+        }
+
+        /* Conteúdo principal */
+        .content {
+            flex: 1;
+            background-color: #000000;
+            padding: 50px;
+            margin-left: 250px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            transition: margin-left 0.3s ease, padding 0.3s ease;
+        }
+
+        .content h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #c2c2c2;
+            font-weight: 700;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #c0c0c0;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* Botões de ação */
+        .content .btn {
+            background-color: #1100ff;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .content .btn:hover {
+            background-color: #0004ff;
+            transform: translateY(-3px);
+        }
+
+        /* Botão de login no canto inferior esquerdo */
+        .login-btn {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: #1100ff;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            width: auto;
+            height: auto;
+            font-weight: bold;
+            border-radius: 20px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #0004ff;
+            transform: translateY(-3px);
+        }
+
+        /* Botão de signup (Cadastro) acima do login */
+        .signup-btn {
+            position: fixed;
+            bottom: 50px;  /* Ajuste para colocar acima do botão de login */
+            left: 10px;
+            background-color: #ff5500;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            width: auto;
+            height: auto;
+            font-weight: bold;
+            border-radius: 20px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .signup-btn:hover {
+            background-color: #ff2e00;
+            transform: translateY(-3px);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                padding: 30px;
+                position: static;
+                box-shadow: none;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+
+            .content h1 {
+                font-size: 28px;
+            }
+
+            .login-btn, .signup-btn {
+                bottom: 10px;
+                left: 10px;
+                padding: 5px 12px;
+                font-size: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>BEM VINDO!</h2>
+        <h3>Nossos cursos:</h3>
+        
+        <a href="#" class="active" onclick="redirectTo('pagina_inicial.html')">Página Inicial</a>
+        <a href="#" onclick="redirectTo('cursomarketingdigital.html')">Marketing Digital</a>
+        <a href="#" onclick="redirectTo('design.html')">Design</a>
+        <a href="#" onclick="redirectTo('cursodelinguagem.html')">Programação</a>
+        <a href="#" onclick="redirectTo('cursoidioma.html')">Linguas</a>
+        <a href="#" onclick="redirectTo('seuscursos.html')">Seus Cursos</a>
+    </div>
+    <div class="content">
+        <h1>Bem-vindo à Página Inicial</h1>
+        <p>Explore nossa lista de cursos no menu lateral para saber mais sobre cada um deles. Escolha a sua área de interesse e dê o primeiro passo para aprender algo novo.</p>
+
+        <p><strong>Dúvidas frequentes:</strong></p>
+
+            <p>1|<strong>"Ao comprar algum curso tenho tempo limitado para estudar?"</strong></p>
+            <p>R: Não, ao comprar algum curso, você poderá estudar ou rever as aulas a qualquer momento!</p>
+            <br>
+            <p>2|<strong>"Ao comprar o curso, onde eu faço e vejo as aulas?"</strong></p>
+            <p>R: Você pode estudar no <a href="seuscursos.html">Seus Cursos</a>, seus cursos estão lá!</p>
+            <br>
+            <p>3|<strong>"Como são as aulas?"</strong></p>
+            <p>R: As aulas são em vídeo, são videoaulas.</p>
+            <br>
+            <p>4|<strong>"Quanto tempo são as aulas?"</strong></p>
+            <p>R: A maioria dos cursos, juntando as videoaulas, dá +67 horas. Alguns dão menos e outros mais, mas a média é 67 horas.</p>
+            <br>
+
+        </p>
+
+        <!-- Botão de Saiba Mais -->
+        <button class="btn" onclick="alert('Em breve mais informações!')">Saiba Mais</button>
+    </div>
+
+    <!-- Botão de Signup -->
+    <button class="signup-btn" onclick="redirectTo('signup.html')">Cadastrar</button>
+
+    <!-- Botão de Login -->
+    <button class="login-btn" onclick="redirectTo('login.html')">Fazer Login</button>
+
+    <script>
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Página Inicial</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffffff, #ffffff);
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Barra lateral */
+        .sidebar {
+            width: 250px;
+            background-color: #000000;
+            color: #413f3f;
+            padding: 40px 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease;
+            box-shadow: none;
+            border-right: none;
+        }
+
+        .sidebar h3 {
+            font-size: 20px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .sidebar h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #0004ff;
+            text-transform: uppercase;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            margin-bottom: 18px;
+            font-size: 18px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .sidebar a:hover {
+            color: #0004ff;
+            transform: translateX(10px);
+        }
+
+        .sidebar a.active {
+            color: #0004ff;
+            font-weight: 600;
+        }
+
+        /* Conteúdo principal */
+        .content {
+            flex: 1;
+            background-color: #000000;
+            padding: 50px;
+            margin-left: 250px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            transition: margin-left 0.3s ease, padding 0.3s ease;
+        }
+
+        .content h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #c2c2c2;
+            font-weight: 700;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #c0c0c0;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        /* Botões de ação */
+        .content .btn {
+            background-color: #1100ff;
+            color: white;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 30px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .content .btn:hover {
+            background-color: #0004ff;
+            transform: translateY(-3px);
+        }
+
+        /* Logado! com ícone */
+        .logged-in {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background-color: #1100ff;
+            color: white;
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 20px;
+            text-transform: uppercase;
+            border: none;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .logged-in:hover {
+            background-color: #0004ff;
+            transform: translateY(-3px);
+        }
+
+        .logged-in i {
+            margin-right: 8px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                padding: 30px;
+                position: static;
+                box-shadow: none;
+            }
+
+            .content {
+                margin-left: 0;
+                padding: 30px;
+            }
+
+            .content h1 {
+                font-size: 28px;
+            }
+
+            .logged-in {
+                bottom: 10px;
+                left: 10px;
+                padding: 5px 12px;
+                font-size: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>BEM VINDO!</h2>
+        <h3>Nossos cursos:</h3>
+        
+        <a href="#" class="active" onclick="redirectTo('pagina_inicial.html')">Página Inicial</a>
+        <a href="#" onclick="redirectTo('cursomarketingdigital2.html')">Marketing Digital</a>
+        <a href="#" onclick="redirectTo('design2.html')">Design</a>
+        <a href="#" onclick="redirectTo('cursodelinguagem2.html')">Programação</a>
+        <a href="#" onclick="redirectTo('cursoidioma2.html')">Linguas</a>
+        <a href="#" onclick="redirectTo('seuscursos2.html')">Seus Cursos</a>
+    </div>
+    <div class="content">
+        <h1>Bem-vindo à Página Inicial</h1>
+        <p>Explore nossa lista de cursos no menu lateral para saber mais sobre cada um deles. Escolha a sua área de interesse e dê o primeiro passo para aprender algo novo.</p>
+
+        <!-- Botão de Saiba Mais -->
+        <button class="btn" onclick="alert('Em breve mais informações!')">Saiba Mais</button>
+    </div>
+
+    <!-- Botão "Logado!" com ícone -->
+    <button class="logged-in">
+        <i class="fas fa-user"></i> Logado!
+    </button>
+
+    <script>
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>
